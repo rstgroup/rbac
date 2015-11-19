@@ -26,10 +26,10 @@ class RbacTest extends TestCase
      */
     public function testEnforcePermissionAsString()
     {
-        $this->setExpectedException(RuntimeException::class);
+        $this->setExpectedException('Rbac\Exception\RuntimeException');
 
         $rbac = new Rbac();
-        $rbac->isGranted([], new \stdClass());
+        $rbac->isGranted(array(), new \stdClass());
     }
 
     /**
@@ -51,7 +51,7 @@ class RbacTest extends TestCase
     public function testCanUseEmptyArray()
     {
         $rbac = new Rbac();
-        $this->assertFalse($rbac->isGranted([], 'permission'));
+        $this->assertFalse($rbac->isGranted(array(), 'permission'));
     }
 
     /**
@@ -64,7 +64,7 @@ class RbacTest extends TestCase
         $role2 = new Role('Bar');
         $role2->addPermission('permission');
 
-        $roles = [$role1, $role2];
+        $roles = array($role1, $role2);
         $rbac  = new Rbac();
 
         $this->assertTrue($rbac->isGranted($roles, 'permission'));
@@ -78,7 +78,7 @@ class RbacTest extends TestCase
         $role1 = new Role('Foo');
         $role2 = new Role('Bar');
 
-        $roles = [$role1, $role2];
+        $roles = array($role1, $role2);
         $rbac  = new Rbac();
 
         $this->assertFalse($rbac->isGranted($roles, 'permission'));

@@ -49,10 +49,10 @@ class RoleTest extends \PHPUnit_Framework_TestCase
         $role->addPermission('foo');
         $role->addPermission('bar');
 
-        $expectedPermissions = [
+        $expectedPermissions = array(
             'foo' => 'foo',
             'bar' => 'bar',
-        ];
+        );
         $this->assertEquals($expectedPermissions, $role->getPermissions());
     }
 }

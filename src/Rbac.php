@@ -37,7 +37,7 @@ class Rbac
         }
 
         if ($roles instanceof RoleInterface) {
-            $roles = [$roles];
+            $roles = array($roles);
         }
 
         foreach ($this->flattenRoles($roles) as $role) {
@@ -52,22 +52,19 @@ class Rbac
 
     /**
      * @param  RoleInterface[]|Traversable $roles
-     * @return Generator
+     * @return array
      */
     protected function flattenRoles($roles)
     {
+        $flattenedRoles = array();
         foreach ($roles as $role) {
-            yield $role;
-
-            if (!$role instanceof HierarchicalRoleInterface) {
-                continue;
-            }
-
-            $children = $this->flattenRoles($role->getChildren());
-
-            foreach ($children as $child) {
-                yield $child;
+            if ($role instanceof HierarchicalRoleInterface) {
+                $flattenedRoles =  array_merge($flattenedRoles, $this->flattenRoles($role->getChildren()));
+            } else {
+                $flattenedRoles[] = $role;
             }
         }
+
+        return $flattenedRoles;
     }
 }

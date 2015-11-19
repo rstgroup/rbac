@@ -23,7 +23,7 @@ class Role implements RoleInterface
     /**
      * @var string[]
      */
-    protected $permissions = [];
+    protected $permissions = array();
 
     /**
      * Constructor

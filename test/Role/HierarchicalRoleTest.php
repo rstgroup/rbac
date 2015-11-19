@@ -61,6 +61,6 @@ class HierarchicalRoleTest extends TestCase
         $children = $role->getChildren();
 
         $this->assertCount(2, $children);
-        $this->assertContainsOnlyInstancesOf(HierarchicalRoleInterface::class, $children);
+        $this->assertContainsOnlyInstancesOf('Rbac\Role\HierarchicalRoleInterface', $children);
     }
 }
